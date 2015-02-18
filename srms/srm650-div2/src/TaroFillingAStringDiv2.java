@@ -5,8 +5,9 @@ import static java.lang.Math.*;
 public class TaroFillingAStringDiv2 {
 	
 	public int getNumber(String S) {
+        System.out.println("String :: " + S);
 
-        if (S.indexOf("?") < 0) {
+        if (!S.contains("?")) {
             char ch1[] = S.toCharArray();
             int ugliness = 0;
             for (int i=1; i<ch1.length; i++) {
@@ -17,7 +18,7 @@ public class TaroFillingAStringDiv2 {
             return ugliness;
         }
 
-        if (S.indexOf("A") < 0 && S.indexOf("B") < 0) {
+        if (!S.contains("A") && !S.contains("B")) {
             return 0;
         }
 
@@ -44,9 +45,14 @@ public class TaroFillingAStringDiv2 {
                 if (ch[i] == 'A') {
                     ch[i-1] = 'B';
                     result1 = getNumber(new String (ch));
+                    // The break statement is critical. Else the input string can get incorrectly modified.
+                    // Ex: In the 2nd iteration of this loop for ??AB,
+                    // the string will become: ?BBB - note A was changed to B, which should never happen.
+                    break;
                 } else if (ch[i] == 'B') {
                     ch[i-1] = 'A';
                     result2 = getNumber(new String(ch));
+                    break;
                 }
             }
         }
