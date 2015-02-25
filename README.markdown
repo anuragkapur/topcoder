@@ -14,7 +14,9 @@ Refer: [http://apps.topcoder.com/wiki/display/tc/Algorithm+Overview](http://apps
 * [SRM challenges](srms)
 * [TopCoder Open 2014](tco14)
 
-Each problem is in its own subdirectory, each of which is an Intellij Project Module. Example: [srms/srm615/AmebaDiv1](srms/srm615/AmebaDiv1)
+Pre Jan 2015, each problem was in its own subdirectory, each of which is an Intellij Project Module. Example: [srms/srm615/AmebaDiv1](srms/srm615/AmebaDiv1)
+
+More recently there is one IntelliJ modeule per SRM. Example: [srms/srm650-div2](srms/srm650-div2), with problem statements in the [resources](srms/srm650-div2/resources) folder and source and test cases in [src](srms/srm650-div2/src) and [test](srms/srm650-div2/test) respectively.
 
 ##Contact Me
 * Twitter handle:[@anuragkapur][twitterlink]
