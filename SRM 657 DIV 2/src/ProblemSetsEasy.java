@@ -2,12 +2,16 @@ import java.util.*;
 import java.math.*;
 import static java.lang.Math.*;
 
+/**
+ * Max points: 500
+ * Status: Passed system tests
+ */
 public class ProblemSetsEasy {
 	
 	public int maxSets(int E, int EM, int M, int MH, int H) {
 
 		int count = 0;
-		int maxIterations = E + EM;
+		int maxIterations = Math.min(E + EM, H + MH);
 		for (int i = 0; i < maxIterations; i++) {
 
 			// slot E
@@ -32,7 +36,7 @@ public class ProblemSetsEasy {
 			if (M > 0) {
 				M --;
 			} else {
-				char maxCode = getMaxCode(E+EM, H+MH);
+				char maxCode = getMaxCode(E, EM, MH, H);
 				if (maxCode == 'E' && EM > 0) {
 					// take from EM
 					EM --;
@@ -52,11 +56,17 @@ public class ProblemSetsEasy {
 		return count;
 	}
 
-	private char getMaxCode(int E, int H) {
-		if (E > H) {
-			return 'E';
-		} else {
+	private char getMaxCode(int E, int EM, int MH, int H) {
+		if (EM == 0) {
 			return 'H';
+		} else if (MH == 0){
+			return 'E';
+		} else if (E+EM >= MH+H) {
+			return 'E';
+		} else if (E+EM < MH + H){
+			return 'H';
+		} else {
+			throw new IllegalStateException("meh");
 		}
 	}
 }
