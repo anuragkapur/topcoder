@@ -7,23 +7,56 @@ public class ProblemSetsEasy {
 	public int maxSets(int E, int EM, int M, int MH, int H) {
 
 		int count = 0;
+		int maxIterations = E + EM;
+		for (int i = 0; i < maxIterations; i++) {
 
-		// get min of E, M, H and subtract min from E, M, H
-		int min = min(E, M, H);
-		count += min;
-		E = E - min;
-		M = M - min;
-		H = H - min;
+			// slot E
+			if (E > 0) {
+				E --;
+			} else if (EM > 0){
+				EM --;
+			} else {
+				break;
+			}
 
-		// compute all possible distributions of EM
+			// slot H
+			if (H > 0) {
+				H --;
+			} else if (MH > 0) {
+				MH --;
+			} else {
+				break;
+			}
 
-		// compute all possible distributions of MH
+			// slot M
+			if (M > 0) {
+				M --;
+			} else {
+				char maxCode = getMaxCode(E+EM, H+MH);
+				if (maxCode == 'E' && EM > 0) {
+					// take from EM
+					EM --;
+				} else if (maxCode == 'H' && MH > 0) {
+					// take from MH
+					MH --;
+				} else {
+					break;
+				}
 
-		return 0;
+			}
+
+			// update count
+			count ++;
+		}
+
+		return count;
 	}
 
-	private int min(int E, int M, int H) {
-		int min = Math.min(E, M);
-		return Math.min(min, H);
+	private char getMaxCode(int E, int H) {
+		if (E > H) {
+			return 'E';
+		} else {
+			return 'H';
+		}
 	}
 }
